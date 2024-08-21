@@ -3,12 +3,14 @@ from ale_py import ALEInterface
 from ale_py.roms import Breakout
 from stable_baselines3 import DQN
 from stable_baselines3.common.vec_env import DummyVecEnv
+from stable_baselines3.common.atari_wrappers import AtariWrapper
 
 ale = ALEInterface()
 ale.loadROM(Breakout)
 
 # Create a single environment
 env = gym.make("ALE/Breakout-v5", render_mode="human")
+env = AtariWrapper(env, frame_skip=4, screen_size=84)
 
 # Wrap the single environment in a VecEnv
 vec_env = DummyVecEnv([lambda: env])

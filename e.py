@@ -28,7 +28,7 @@ if __name__ == "__main__":
     env = SubprocVecEnv([make_env(env_id) for _ in range(num_envs)])
     # env = DummyVecEnv([make_env(env_id)])
 
-    model = DQN("CnnPolicy", env, verbose=1, device="cuda", learning_starts=42_000, buffer_size=42_000, exploration_fraction=0.99, learning_rate=0.00025, exploration_final_eps=0.01, tensorboard_log="./dqn_breakout_tensorboard/")
-    model.learn(total_timesteps=20_000_000, progress_bar=True)
+    model = DQN("CnnPolicy", env, device="cuda", learning_starts=42_000, buffer_size=42_000, exploration_fraction=0.99, learning_rate=0.00025, exploration_final_eps=0.01, tensorboard_log="./dqn_breakout_tensorboard/")
+    model.learn(total_timesteps=50_000_000, progress_bar=True)
     
     model.save("dqn_breakout")
